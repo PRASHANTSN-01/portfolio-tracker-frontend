@@ -3,7 +3,16 @@ import cors from "cors";
 import { holdings, calculateAllocation, calculateSummary, calculateHoldingMetrics } from "./portfolioData.js";
 
 const app = express();
-app.use(cors());
+
+// CORS setup for production (allow only your frontend)
+app.use(cors({
+  origin: ["https://portfolio-tracker-frontend-i02s.onrender.com"], // change to your deployed frontend URL
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+
+// Middleware to parse JSON if needed for POST requests
+app.use(express.json());
 
 // Portfolio Holdings with calculated metrics
 app.get("/api/portfolio/holdings", (req, res) => {
@@ -14,6 +23,7 @@ app.get("/api/portfolio/holdings", (req, res) => {
     });
     res.json(holdingsWithMetrics);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch holdings" });
   }
 });
@@ -24,6 +34,7 @@ app.get("/api/portfolio/allocation", (req, res) => {
     const allocation = calculateAllocation(holdings);
     res.json(allocation);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch allocation" });
   }
 });
@@ -31,7 +42,6 @@ app.get("/api/portfolio/allocation", (req, res) => {
 // Performance Comparison - static for now, can be enhanced later
 app.get("/api/portfolio/performance", (req, res) => {
   try {
-    // Placeholder static data, can be replaced with dynamic calculations
     const performance = {
       timeline: [
         { date: "2024-01-01", portfolio: 650000, nifty50: 21000, gold: 62000 },
@@ -46,6 +56,7 @@ app.get("/api/portfolio/performance", (req, res) => {
     };
     res.json(performance);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch performance" });
   }
 });
@@ -56,6 +67,7 @@ app.get("/api/portfolio/summary", (req, res) => {
     const summary = calculateSummary(holdings);
     res.json(summary);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch summary" });
   }
 });
@@ -66,4 +78,4 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Backend running on port ${PORT}`));
