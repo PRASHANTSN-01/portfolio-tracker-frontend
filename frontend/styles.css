@@ -178,3 +178,166 @@ th:hover {
   border-radius: 4px;
   margin: 20px 0;
 }
+
+/* Asset Allocation */
+.asset-allocation .charts-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.asset-allocation .chart-section {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+/* Performance Chart */
+.performance-chart .performance-metrics {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.performance-chart .metric-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  min-width: 120px;
+  color: #2c3e50;
+}
+
+.performance-chart .return-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #28a745;
+  margin: 5px 0;
+}
+
+.performance-chart .return-period {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Top Performers */
+.top-performers .insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.top-performers .insight-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #2c3e50;
+}
+
+.top-performers .performer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.top-performers .symbol {
+  font-size: 1.2rem;
+}
+
+.top-performers .name {
+  font-size: 1rem;
+  color: #555;
+}
+
+.top-performers .performance.positive {
+  color: #28a745;
+}
+
+.top-performers .performance.negative {
+  color: #dc3545;
+}
+
+.top-performers .score-display {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.top-performers .label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.top-performers .risk {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.top-performers .risk.moderate {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.top-performers .risk.low {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.top-performers .risk.high {
+  background-color: #d9534f;
+  color: white;
+}
+
+.top-performers .portfolio-summary .summary-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.top-performers .portfolio-summary .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.top-performers .portfolio-summary .label {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.top-performers .portfolio-summary .value {
+  font-size: 1.2rem;
+}
+
+.top-performers .portfolio-summary .value.positive {
+  color: #28a745;
+}
+
+.top-performers .portfolio-summary .value.negative {
+  color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .asset-allocation .charts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .performance-chart .performance-metrics {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-performers .insights-grid {
+    grid-template-columns: 1fr;
+  }

@@ -22,7 +22,7 @@ const TopPerformers = () => {
           <div className="performer-info">
             <span className="symbol">{summary.topPerformer.symbol}</span>
             <span className="name">{summary.topPerformer.name}</span>
-            <span className="performance positive">+{summary.topPerformer.gainPercent}%</span>
+            <span className="performance positive">+{summary.topPerformer.gainPercent.toFixed(2)}%</span>
           </div>
         </div>
 
@@ -31,7 +31,7 @@ const TopPerformers = () => {
           <div className="performer-info">
             <span className="symbol">{summary.worstPerformer.symbol}</span>
             <span className="name">{summary.worstPerformer.name}</span>
-            <span className="performance negative">{summary.worstPerformer.gainPercent}%</span>
+            <span className="performance negative">{summary.worstPerformer.gainPercent.toFixed(2)}%</span>
           </div>
         </div>
 
@@ -55,20 +55,34 @@ const TopPerformers = () => {
 
       <div className="portfolio-summary">
         <h3>Portfolio Summary</h3>
-        <div className="summary-stats">
-          <div className="stat">
-            <span className="label">Total Value</span>
-            <span className="value">₹{summary.totalValue.toLocaleString()}</span>
+        <div className="summary-stats enhanced-summary">
+          <div className="stat-card-large">
+            <div className="stat-icon">💰</div>
+            <div className="stat-content">
+              <span className="stat-label">Total Value</span>
+              <span className="stat-value">₹{summary.totalValue.toLocaleString()}</span>
+            </div>
           </div>
-          <div className="stat">
-            <span className="label">Total Invested</span>
-            <span className="value">₹{summary.totalInvested.toLocaleString()}</span>
+          
+          <div className="stat-card-large">
+            <div className="stat-icon">📊</div>
+            <div className="stat-content">
+              <span className="stat-label">Total Invested</span>
+              <span className="stat-value">₹{summary.totalInvested.toLocaleString()}</span>
+            </div>
           </div>
-          <div className="stat">
-            <span className="label">Total Gain/Loss</span>
-            <span className={`value ${summary.totalGainLoss >= 0 ? 'positive' : 'negative'}`}>
-              ₹{summary.totalGainLoss.toLocaleString()} ({summary.totalGainLossPercent}%)
-            </span>
+          
+          <div className="stat-card-large gain-loss-card">
+            <div className="stat-icon">📈</div>
+            <div className="stat-content">
+              <span className="stat-label">Total Gain/Loss</span>
+              <span className={`stat-value ${summary.totalGainLoss >= 0 ? 'positive' : 'negative'}`}>
+                ₹{summary.totalGainLoss.toLocaleString()}
+              </span>
+              <span className={`stat-percentage ${summary.totalGainLoss >= 0 ? 'positive' : 'negative'}`}>
+                {summary.totalGainLossPercent.toFixed(2)}%
+              </span>
+            </div>
           </div>
         </div>
       </div>

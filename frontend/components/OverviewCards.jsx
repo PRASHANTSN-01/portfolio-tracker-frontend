@@ -20,28 +20,32 @@ export default function OverviewCards() {
     }).format(value);
   };
 
+  const formatPercent = (value) => {
+    return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+  };
+
   return (
     <div className="overview-cards">
-      <div className="overview-card">
+      <div className="overview-card large-card">
         <h3>Total Portfolio Value</h3>
-        <div className="value">{formatCurrency(data.totalValue)}</div>
+        <div className="value large-value">{formatCurrency(data.totalValue)}</div>
         <div className="label">Current Market Value</div>
       </div>
 
-      <div className="overview-card">
+      <div className="overview-card gain-loss-card">
         <h3>Total Gain/Loss</h3>
         <div className={`value ${data.totalGainLoss >= 0 ? 'positive' : 'negative'}`}>
           {formatCurrency(data.totalGainLoss)}
         </div>
-        <div className="gain-loss-percent">
-          {data.totalGainLossPercent >= 0 ? '+' : ''}{data.totalGainLossPercent}%
+        <div className={`gain-loss-percent ${data.totalGainLossPercent >= 0 ? 'positive' : 'negative'}`}>
+          {formatPercent(data.totalGainLossPercent)}
         </div>
       </div>
 
-      <div className="overview-card">
+      <div className="overview-card gain-loss-card">
         <h3>Portfolio Performance</h3>
         <div className={`value ${data.totalGainLossPercent >= 0 ? 'positive' : 'negative'}`}>
-          {data.totalGainLossPercent >= 0 ? '+' : ''}{data.totalGainLossPercent}%
+          {formatPercent(data.totalGainLossPercent)}
         </div>
         <div className="label">Since Investment</div>
       </div>
