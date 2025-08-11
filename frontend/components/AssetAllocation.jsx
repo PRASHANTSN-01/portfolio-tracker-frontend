@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
+const API = import.meta.env.VITE_API_BASE_URL; // load from .env
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A569BD', '#CD6155'];
 
 const AssetAllocation = () => {
   const [allocation, setAllocation] = useState(null);
 
   useEffect(() => {
-    axios.get("/api/portfolio/allocation")
+    axios.get(`${API}/allocation`)
       .then(res => setAllocation(res.data))
-      .catch(console.error);
+      .catch(err => console.error("Error fetching allocation:", err));
   }, []);
 
   if (!allocation) return <p>Loading asset allocation...</p>;
 
-  // Prepare data for sector distribution pie chart
   const sectorData = Object.entries(allocation.bySector || {}).map(([sector, data]) => ({
     name: sector,
     value: Number(data.value || 0),
@@ -67,14 +67,10 @@ const MarketCapDistribution = ({ data }) => {
     value: Number(value || 0)
   }));
 
-  // Check if all values are zero
   const allZero = marketCapData.every(item => item.value === 0);
 
-  // If all zero, show single full-color slice
   if (allZero) {
-    marketCapData = [
-      { name: "No Data", value: 1 }
-    ];
+    marketCapData = [{ name: "No Data", value: 1 }];
   }
 
   return (
@@ -91,17 +87,12 @@ const MarketCapDistribution = ({ data }) => {
           label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(2)}%`}
         >
           {marketCapData.map((entry, index) => (
-            <Cell
-              key={`cell-mc-${index}`}
-              fill={COLORS[index % COLORS.length]}
-            />
+            <Cell key={`cell-mc-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip
-          formatter={(value, name) =>
-            `${((value / marketCapData.reduce((sum, d) => sum + d.value, 0)) * 100).toFixed(2)}%`
-          }
-        />
+        <Tooltip formatter={(value, name) =>
+          `${((value / marketCapData.reduce((sum, d) => sum + d.value, 0)) * 100).toFixed(2)}%`
+        } />
         <Legend />
       </PieChart>
     </ResponsiveContainer>
