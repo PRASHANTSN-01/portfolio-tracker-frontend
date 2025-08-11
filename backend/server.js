@@ -6,7 +6,10 @@ const app = express();
 
 // CORS setup for production (allow only your frontend)
 app.use(cors({
-  origin: ["https://portfolio-tracker-frontend-i02s.onrender.com"], // change to your deployed frontend URL
+  origin: [
+    "https://portfolio-tracker-frontend-i02s.onrender.com",
+    "https://portfolio-tracker-frontend-sox2.onrender.com"
+  ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 }));

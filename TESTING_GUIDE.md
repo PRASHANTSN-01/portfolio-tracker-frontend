@@ -233,7 +233,9 @@ PORT=5001
 NODE_ENV=test
 
 # frontend/.env.test
+VITE_API_URL=https://wealthmanager-backend.onrender.com
 VITE_API_URL=http://localhost:5001
+
 ```
 
 ## Maintenance

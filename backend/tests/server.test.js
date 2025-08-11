@@ -1,7 +1,6 @@
 import request from 'supertest';
 import express from 'express';
 import cors from 'cors';
-import { holdings, calculateAllocation, calculateSummary, calculateHoldingMetrics } from '../portfolioData.js';
 
 // Mock the portfolioData module
 jest.mock('../portfolioData.js', () => ({
@@ -21,7 +20,7 @@ jest.mock('../portfolioData.js', () => ({
   calculateSummary: jest.fn()
 }));
 
-import { calculateHoldingMetrics, calculateAllocation, calculateSummary } from '../portfolioData.js';
+import { holdings, calculateHoldingMetrics, calculateAllocation, calculateSummary } from '../portfolioData.js';
 
 describe('Express Server API Endpoints', () => {
   let app;
