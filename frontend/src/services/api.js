@@ -1,9 +1,13 @@
 import axios from "axios";
 
-const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+// ✅ Get base URL from env or fallback
+let API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
+// ✅ Remove trailing slash if it exists
+API = API.replace(/\/+$/, "");
 
 const handleError = (error) => {
-  console.error('API call error:', error);
+  console.error("API call error:", error);
   throw error;
 };
 
@@ -18,4 +22,3 @@ export const fetchPerformance = () =>
 
 export const fetchSummary = () =>
   axios.get(`${API}/api/portfolio/summary`).catch(handleError);
-
